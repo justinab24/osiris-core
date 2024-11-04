@@ -44,6 +44,21 @@ def serializeArgs(*args) -> str:
 def deserializeResponse(response: str) -> any:
     return json.loads(response)
 
+def setTimeout(timeout: int) -> None:
+    global timeout_duration
+    if timeout <= 0:
+        raise ValueError("Timeout must be a positive integer.")
+    
+    timeout_duration = timeout
+
+def cancelRequest(request_id: str) -> bool:
+    requests = []
+    if request_id in requests: 
+        requests.remove(request_id)
+        return True
+    else: 
+        return False
+    
 def handleFunctionError(error_code: int, error_message: str) -> None:
 
     print(f"Error {error_code}: {error_message}")
